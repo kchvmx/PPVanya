@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Іван Наконечний — Весільний фотограф і відеооператор | Рівне</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #FAF8F4;
+    --bg2:       #F3EFE8;
+    --bg3:       #EDE8DF;
+    --dark:      #1C1810;
+    --mid:       #4A4035;
+    --muted:     #9C9080;
+    --rose:      #C0896A;
+    --rose-dark: #A06850;
+    --rose-pale: #F0DDD3;
+    --gold:      #B89A68;
+    --line:      rgba(28,24,16,0.1);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 999; opacity: 1;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    padding: 24px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(250,248,244,0.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-bottom-color: var(--line); }
+
+  .nav-brand {
+    font-family: 'Cormorant', serif;
+    font-size: 20px; font-weight: 400; letter-spacing: 0.05em;
+    color: var(--dark); text-decoration: none;
+  }
+  .nav-brand em { font-style: italic; color: var(--rose); }
+
+  .nav-menu { display: flex; gap: 40px; list-style: none; }
+  .nav-menu a {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none; font-weight: 400;
+    transition: color 0.25s; position: relative;
+  }
+  .nav-menu a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1px; background: var(--rose); transition: width 0.3s;
+  }
+  .nav-menu a:hover { color: var(--dark); }
+  .nav-menu a:hover::after { width: 100%; }
+
+  .nav-cta {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--bg); background: var(--dark);
+    padding: 11px 26px; text-decoration: none; font-weight: 400;
+    transition: background 0.3s;
+  }
+  .nav-cta:hover { background: var(--rose-dark); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 55% 45%;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-left {
+    padding: 140px 72px 80px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; z-index: 2;
+  }
+
+  .hero-watermark {
+    position: absolute; top: -60px; right: -40px;
+    font-family: 'Cormorant', serif;
+    font-size: clamp(200px, 30vw, 420px);
+    font-weight: 300; font-style: italic;
+    color: rgba(192,137,106,0.055);
+    line-height: 1; pointer-events: none; user-select: none; z-index: 1;
+  }
+
+  .hero-chip {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--rose-pale); padding: 8px 16px;
+    margin-bottom: 36px; width: fit-content;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-chip-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rose); }
+  .hero-chip span {
+    font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--rose-dark); font-weight: 400;
+  }
+
+  .hero-h1 {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(52px, 7vw, 92px);
+    font-weight: 300; line-height: 0.95; letter-spacing: -0.01em;
+    margin-bottom: 32px; opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-h1 em { font-style: italic; color: var(--rose); }
+
+  .hero-desc {
+    font-size: 15px; line-height: 1.85; color: var(--muted);
+    max-width: 400px; font-weight: 300; margin-bottom: 52px;
+    opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-btns {
+    display: flex; gap: 16px; align-items: center;
+    opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .btn-dark {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--dark); color: var(--bg);
+    padding: 15px 34px; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    text-decoration: none; font-weight: 400; transition: all 0.3s;
+  }
+  .btn-dark:hover { background: var(--rose-dark); transform: translateY(-1px); }
+
+  .btn-link {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    border-bottom: 1px solid rgba(156,144,128,0.4);
+    padding-bottom: 2px; transition: all 0.3s;
+  }
+  .btn-link:hover { color: var(--rose); border-color: var(--rose); }
+
+  .hero-right {
+    position: relative; background: var(--bg2); overflow: hidden;
+  }
+
+  .hero-mosaic {
+    position: absolute; inset: 0;
+    display: grid; grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr; gap: 3px;
+  }
+  .mosaic-cell {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 44px; transition: transform 0.6s; overflow: hidden;
+  }
+  .mosaic-cell:hover { transform: scale(1.05); }
+  .mc1 { background: linear-gradient(135deg,#EDD5C5,#D8B8A5); }
+  .mc2 { background: linear-gradient(135deg,#D8C8B8,#C4B0A0); grid-row:span 2; }
+  .mc3 { background: linear-gradient(135deg,#F0E2D8,#DCC8BC); }
+
+  .hero-right-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to left, transparent 50%, var(--bg) 100%);
+  }
+
+  .hero-float-badge {
+    position: absolute; bottom: 48px; left: -24px;
+    background: var(--bg); border: 1px solid var(--line);
+    padding: 16px 22px; z-index: 5;
+    box-shadow: 0 8px 40px rgba(28,24,16,0.08);
+    opacity: 0; animation: fadeIn 0.8s 1.2s forwards;
+  }
+  .float-badge-top {
+    font-family: 'Cormorant', serif;
+    font-size: 28px; font-weight: 300; color: var(--rose); line-height: 1;
+  }
+  .float-badge-bot {
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); margin-top: 4px;
+  }
+
+  .hero-scroll-hint {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center;
+    gap: 8px; padding-bottom: 28px; z-index: 10;
+    opacity: 0; animation: fadeIn 1s 1.6s forwards;
+  }
+  .hero-scroll-hint span {
+    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted);
+  }
+  .scroll-ticker {
+    width: 1px; height: 48px;
+    background: linear-gradient(to bottom, transparent, var(--rose));
+    animation: tickDown 2s ease-in-out infinite;
+  }
+
+  /* COMMONS */
+  .pad { padding: 120px 60px; }
+
+  .s-label {
+    font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--rose); display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+  }
+  .s-label::before { content:''; display:block; width:20px; height:1px; background:var(--rose); }
+
+  .s-h2 {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(36px,5vw,58px); font-weight: 300; line-height: 1.08;
+  }
+  .s-h2 em { font-style: italic; color: var(--rose); }
+
+  /* SERVICES */
+  .services { background: var(--bg); }
+  .services-top {
+    display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 72px;
+  }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    border: 1px solid var(--line);
+  }
+
+  .svc {
+    padding: 48px 40px; border-right: 1px solid var(--line);
+    position: relative; overflow: hidden; transition: background 0.35s;
+  }
+  .svc:last-child { border-right: none; }
+  .svc:hover { background: var(--bg2); }
+
+  .svc-num {
+    font-family: 'Cormorant', serif; font-size: 72px; font-weight: 300;
+    color: rgba(192,137,106,0.13); line-height: 1; margin-bottom: 20px; font-style: italic;
+  }
+  .svc-icon { color: var(--rose); margin-bottom: 20px; }
+  .svc-title { font-family:'Cormorant',serif; font-size:28px; font-weight:400; margin-bottom:14px; }
+  .svc-desc { font-size:13px; line-height:1.85; color:var(--muted); font-weight:300; }
+  .svc-tag {
+    display:inline-block; margin-top:28px; font-size:9px; letter-spacing:0.25em;
+    text-transform:uppercase; color:var(--rose); border:1px solid rgba(192,137,106,0.3); padding:5px 12px;
+  }
+  .svc-line {
+    position:absolute; bottom:0; left:0; width:0; height:2px; background:var(--rose); transition:width 0.5s;
+  }
+  .svc:hover .svc-line { width:100%; }
+
+  /* PORTFOLIO */
+  .portfolio { background: var(--bg2); }
+
+  .portfolio-tabs {
+    display: flex; gap: 0; margin-bottom: 56px; margin-top: 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .p-tab {
+    padding: 14px 28px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); cursor: pointer; background: none;
+    border: none; border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: all 0.25s; font-family: 'Outfit', sans-serif;
+  }
+  .p-tab:hover { color: var(--dark); }
+  .p-tab.active { color: var(--rose); border-bottom-color: var(--rose); }
+
+  .p-panel { display: none; }
+  .p-panel.active { display: block; }
+
+  .portfolio-grid {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 4px;
+  }
+  .portfolio-grid.two-col { grid-template-columns: 1fr 1fr; }
+
+  .p-item {
+    aspect-ratio: 3/4; background: var(--bg3);
+    position: relative; overflow: hidden; cursor: pointer;
+  }
+  .p-item.wide { aspect-ratio: 16/9; grid-column: span 2; }
+
+  .p-item-inner {
+    width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center; font-size:36px;
+    transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .p-item:hover .p-item-inner { transform: scale(1.06); }
+
+  .pg1 { background: linear-gradient(145deg,#E8D0C0,#D4B8A8,#C8A090); }
+  .pg2 { background: linear-gradient(145deg,#D8CCC0,#C8B8AC,#B8A89C); }
+  .pg3 { background: linear-gradient(145deg,#F0E4D8,#E4D0C4,#D8BCA8); }
+  .pg4 { background: linear-gradient(145deg,#E4D8CC,#D8C8BC,#CCBCAC); }
+  .pg5 { background: linear-gradient(145deg,#ECD4C8,#E0C0B0,#D4ACA0); }
+  .pg6 { background: linear-gradient(145deg,#F0DDD0,#E8CCC0,#DDB8A8); }
+  .pg7 { background: linear-gradient(145deg,#D8E0E8,#C8D0D8,#B8C0C8); }
+  .pg8 { background: linear-gradient(145deg,#E8E0D8,#D8D0C8,#C8C0B8); }
+
+  .p-item-overlay {
+    position:absolute; inset:0; background:rgba(28,24,16,0);
+    display:flex; align-items:flex-end; padding:20px; transition:background 0.4s;
+  }
+  .p-item:hover .p-item-overlay { background:rgba(28,24,16,0.35); }
+
+  .p-item-label {
+    font-family:'Cormorant',serif; font-size:18px; color:#FAF8F4;
+    opacity:0; transform:translateY(8px); transition:all 0.4s;
+  }
+  .p-item:hover .p-item-label { opacity:1; transform:none; }
+
+  .portfolio-cta { margin-top:48px; display:flex; justify-content:center; }
+
+  /* ABOUT */
+  .about { display:grid; grid-template-columns:1fr 1fr; background:var(--bg); }
+
+  .about-img-side {
+    background: var(--bg2); position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center; min-height:600px;
+  }
+
+  .about-portrait {
+    width:300px; aspect-ratio:2/3;
+    background:linear-gradient(145deg,#E8D4C4,#D8C0AC,#C8A890);
+    display:flex; align-items:center; justify-content:center; font-size:80px;
+    position:relative;
+  }
+  .about-portrait-tag {
+    position:absolute; top:24px; right:-20px; background:var(--rose); color:var(--bg);
+    padding:6px 16px; font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+  }
+  .about-portrait-bottom {
+    position:absolute; bottom:-1px; left:-1px; right:-1px;
+    background:var(--bg); padding:20px 24px; border-top:2px solid var(--rose);
+  }
+  .apb-name { font-family:'Cormorant',serif; font-size:22px; font-weight:400; }
+  .apb-sub { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-top:2px; }
+
+  .about-text-side { padding:100px 72px; display:flex; flex-direction:column; justify-content:center; }
+
+  .about-stats-row {
+    display:flex; gap:40px; margin:36px 0;
+    padding:28px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .as-num { font-family:'Cormorant',serif; font-size:44px; font-weight:300; color:var(--rose); line-height:1; }
+  .as-lbl { font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-top:4px; }
+
+  .about-p { font-size:15px; line-height:1.9; color:var(--muted); font-weight:300; margin-bottom:18px; }
+  .about-quote {
+    font-family:'Cormorant',serif; font-size:22px; font-style:italic; line-height:1.6;
+    color:var(--dark); border-left:2px solid var(--rose); padding-left:24px; margin:32px 0;
+  }
+
+  .about-chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:36px; }
+  .chip {
+    font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+    padding:8px 16px; border:1px solid var(--line); color:var(--muted); transition:all 0.25s;
+  }
+  .chip:hover { border-color:var(--rose); color:var(--rose); }
+
+  /* REVIEWS */
+  .reviews { background: var(--bg2); }
+  .reviews-wrap { max-width:900px; margin:0 auto; text-align:center; }
+
+  .reviews-score-bar {
+    display:inline-flex; align-items:center; gap:28px;
+    background:var(--bg); border:1px solid var(--line);
+    padding:24px 48px; margin:48px 0;
+    box-shadow:0 4px 24px rgba(28,24,16,0.05);
+  }
+  .rsb-num { font-family:'Cormorant',serif; font-size:56px; font-weight:300; color:var(--dark); line-height:1; }
+  .rsb-stars { color:var(--rose); font-size:20px; letter-spacing:4px; }
+  .rsb-sub { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-top:4px; text-align:left; }
+
+  .review-card {
+    background:var(--bg); padding:48px 56px; text-align:left;
+    border:1px solid var(--line); position:relative;
+  }
+  .review-card::before {
+    content:'\201C'; font-family:'Cormorant',serif; font-size:140px; font-style:italic;
+    color:rgba(192,137,106,0.1); position:absolute; top:0; left:24px; line-height:1.1;
+  }
+  .review-txt {
+    font-family:'Cormorant',serif; font-size:26px; font-style:italic;
+    line-height:1.6; color:var(--dark); margin-bottom:28px; position:relative; z-index:1;
+  }
+  .review-author { display:flex; align-items:center; gap:14px; }
+  .rv-avatar {
+    width:44px; height:44px; border-radius:50%; background:var(--rose-pale);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Cormorant',serif; font-size:20px; color:var(--rose);
+  }
+  .rv-name { font-size:13px; font-weight:500; color:var(--dark); }
+  .rv-meta { font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-top:2px; }
+
+  /* CONTACT */
+  .contact-section { background:var(--bg); display:grid; grid-template-columns:1fr 1fr; }
+
+  .contact-left { padding:100px 72px; border-right:1px solid var(--line); }
+  .contact-items { margin-top:52px; }
+
+  .ci {
+    display:flex; align-items:flex-start; gap:18px;
+    padding:24px 0; border-bottom:1px solid var(--line);
+    text-decoration:none; color:inherit; transition:padding-left 0.25s;
+  }
+  a.ci:hover { padding-left:6px; }
+  .ci-icon {
+    width:38px; height:38px; flex-shrink:0; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--rose); margin-top:2px; transition:background 0.25s;
+  }
+  a.ci:hover .ci-icon { background:var(--rose-pale); }
+  .ci-lbl { font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--muted); margin-bottom:5px; }
+  .ci-val { font-size:15px; font-weight:400; color:var(--dark); }
+  .ci-sub { font-size:12px; color:var(--muted); margin-top:2px; }
+
+  .contact-right { padding:100px 72px; background:var(--bg2); display:flex; flex-direction:column; justify-content:center; }
+
+  .hours-table { margin-top:44px; }
+  .hr-row {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:13px 0; border-bottom:1px solid var(--line);
+  }
+  .hr-day { font-size:13px; color:var(--mid); }
+  .hr-time { font-size:13px; color:var(--rose); font-weight:500; }
+
+  .call-btn {
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    background:var(--dark); color:var(--bg); padding:17px; margin-top:40px;
+    font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
+    text-decoration:none; font-weight:400; transition:background 0.3s; width:100%;
+  }
+  .call-btn:hover { background:var(--rose-dark); }
+
+  /* FOOTER */
+  footer {
+    background:var(--dark); color:rgba(250,248,244,0.9);
+    padding:48px 60px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .f-brand { font-family:'Cormorant',serif; font-size:22px; font-weight:300; }
+  .f-brand em { font-style:italic; color:var(--rose); }
+  .f-links { display:flex; gap:32px; list-style:none; }
+  .f-links a {
+    font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+    color:rgba(250,248,244,0.35); text-decoration:none; transition:color 0.3s;
+  }
+  .f-links a:hover { color:rgba(192,137,106,0.9); }
+  .f-copy { font-size:11px; color:rgba(250,248,244,0.2); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes tickDown {
+    0%,100%{opacity:0.3;transform:scaleY(0.5);transform-origin:top}
+    50%{opacity:1;transform:scaleY(1)}
+  }
+
+  .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.85s ease,transform 0.85s ease; }
+  .reveal.up { opacity:1; transform:none; }
+  .reveal.d1 { transition-delay:.1s; }
+  .reveal.d2 { transition-delay:.2s; }
+  .reveal.d3 { transition-delay:.3s; }
+
+  /* MOBILE */
+  @media(max-width:768px){
+    nav { padding:18px 20px; }
+    .nav-menu,.nav-cta { display:none; }
+    .hero { grid-template-columns:1fr; min-height:auto; }
+    .hero-left { padding:110px 24px 60px; }
+    .hero-right { height:50vw; min-height:240px; }
+    .hero-right-overlay { background:linear-gradient(to bottom,var(--bg),transparent 50%); }
+    .hero-float-badge { display:none; }
+    .pad { padding:80px 24px; }
+    .services-grid { grid-template-columns:1fr; border:none; gap:2px; }
+    .svc { border-right:none; border-bottom:1px solid var(--line); }
+    .portfolio-grid { grid-template-columns:1fr 1fr; }
+    .p-item.wide { grid-column:span 2; }
+    .about { grid-template-columns:1fr; }
+    .about-img-side { min-height:380px; }
+    .about-text-side { padding:60px 24px; }
+    .contact-section { grid-template-columns:1fr; }
+    .contact-left { padding:60px 24px; border-right:none; border-bottom:1px solid var(--line); }
+    .contact-right { padding:60px 24px; }
+    footer { flex-direction:column; gap:20px; text-align:center; padding:40px 24px; }
+    .f-links { display:none; }
+    .services-top { flex-direction:column; align-items:flex-start; gap:24px; }
+    .about-stats-row { gap:24px; }
+    .portfolio-tabs { flex-wrap:wrap; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="#home" class="nav-brand">Іван <em>Наконечний</em></a>
+  <ul class="nav-menu">
+    <li><a href="#services">Послуги</a></li>
+    <li><a href="#portfolio">Портфоліо</a></li>
+    <li><a href="#about">Про мене</a></li>
+    <li><a href="#reviews">Відгуки</a></li>
+    <li><a href="#contact">Контакти</a></li>
+  </ul>
+  <a href="tel:+380966836287" class="nav-cta">Зателефонувати</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-watermark">І</div>
+  <div class="hero-left">
+    <div class="hero-chip">
+      <div class="hero-chip-dot"></div>
+      <span>Весільний фотограф і відеооператор · Рівне</span>
+    </div>
+    <h1 class="hero-h1">
+      Твоє весілля<br>назавжди<br><em>у кадрі</em>
+    </h1>
+    <p class="hero-desc">
+      Іван Наконечний — ПП Ваня. Фото та UHD-відео весільного дня. Рівне, Київ, вся Україна.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-dark">
+        Обговорити дату
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#portfolio" class="btn-link">Переглянути роботи</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-mosaic">
+      <div class="mosaic-cell mc1">🌸</div>
+      <div class="mosaic-cell mc2">💍</div>
+      <div class="mosaic-cell mc3">🤍</div>
+    </div>
+    <div class="hero-right-overlay"></div>
+    <div class="hero-float-badge">
+      <div class="float-badge-top">UHD</div>
+      <div class="float-badge-bot">Якість відео</div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>Гортати</span>
+    <div class="scroll-ticker"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services pad" id="services">
+  <div class="services-top reveal">
+    <div>
+      <div class="s-label">Послуги</div>
+      <h2 class="s-h2">Що я <em>пропоную</em></h2>
+    </div>
+    <a href="#contact" class="btn-link">Дізнатися вартість →</a>
+  </div>
+  <div class="services-grid">
+    <div class="svc reveal">
+      <div class="svc-num">01</div>
+      <svg class="svc-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="8" width="26" height="18" rx="2"/><circle cx="16" cy="17" r="5"/><circle cx="16" cy="17" r="2.5"/><path d="M11 8V7a2 2 0 012-2h6a2 2 0 012 2v1"/></svg>
+      <div class="svc-title">Весільна фотографія</div>
+      <p class="svc-desc">Живі моменти, щирі емоції. Кожен кадр — частина вашої спільної історії, яку ви будете переглядати роками.</p>
+      <span class="svc-tag">Репортаж · Портрет</span>
+      <div class="svc-line"></div>
+    </div>
+    <div class="svc reveal d1">
+      <div class="svc-num">02</div>
+      <svg class="svc-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="7" width="20" height="18" rx="2"/><path d="M22 13l8-5v16l-8-5V13z"/></svg>
+      <div class="svc-title">Відеозйомка UHD</div>
+      <p class="svc-desc">Повнометражний кінофільм вашого весілля у форматі UHD. Кінематографічний монтаж і живий звук.</p>
+      <span class="svc-tag">UHD · Кінофільм</span>
+      <div class="svc-line"></div>
+    </div>
+    <div class="svc reveal d2">
+      <div class="svc-num">03</div>
+      <svg class="svc-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M16 3l3 6 7 1-5 5 1 7-6-3.5L10 22l1-7-5-5 7-1z"/></svg>
+      <div class="svc-title">Фото + Відео пакет</div>
+      <p class="svc-desc">Комплексне покриття весілля від одного майстра. Єдиний стиль, злагоджена робота, вигідна ціна.</p>
+      <span class="svc-tag">Комплекс · Вигідно</span>
+      <div class="svc-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio pad" id="portfolio">
+  <div class="reveal">
+    <div class="s-label">Мої роботи</div>
+    <h2 class="s-h2">Порт<em>фоліо</em></h2>
+  </div>
+
+  <div class="portfolio-tabs reveal">
+    <button class="p-tab active" data-tab="all">Всі роботи</button>
+    <button class="p-tab" data-tab="photo">Фотографія</button>
+    <button class="p-tab" data-tab="video">Відео</button>
+    <button class="p-tab" data-tab="couples">Пари</button>
+  </div>
+
+  <div class="p-panel active" id="tab-all">
+    <div class="portfolio-grid">
+      <div class="p-item"><div class="p-item-inner pg1">🌸</div><div class="p-item-overlay"><div class="p-item-label">Аліна та Дмитро</div></div></div>
+      <div class="p-item"><div class="p-item-inner pg2">💍</div><div class="p-item-overlay"><div class="p-item-label">Обручка</div></div></div>
+      <div class="p-item"><div class="p-item-inner pg3">🤍</div><div class="p-item-overlay"><div class="p-item-label">Олена та Сергій</div></div></div>
+      <div class="p-item"><div class="p-item-inner pg4">🕊️</div><div class="p-item-overlay"><div class="p-item-label">Церемонія</div></div></div>
+      <div class="p-item wide"><div class="p-item-inner pg5" style="font-size:56px;">🎬</div><div class="p-item-overlay"><div class="p-item-label">UHD Фільм — Юля та Олексій</div></div></div>
+      <div class="p-item"><div class="p-item-inner pg6">🌿</div><div class="p-item-overlay"><div class="p-item-label">Деталі</div></div></div>
+      <div class="p-item"><div class="p-item-inner pg7">✨</div><div class="p-item-overlay"><div class="p-item-label">Марія та Іван</div></div></div>
+    </div>
+  </div>
+
+  <div class="p-panel" id="tab-photo">
+    <div class="portfolio-grid">
+      <div class="p-item"><div class="p-item-inner pg1">🌸</div><div class="p-item-overlay"><div class="p-item-label">Аліна та Дмитро</div></div></div>
+      <div class="p-item"><div class="p-item-inner pg3">🤍</div><div class="p-item-overlay"><div class="p-item-label">Олена та Сергій</div></div></div>
+      <div class="p-item"><div class="p-item-inner pg4">🕊️</div><div class="p-item-overlay"><div class="p-item-label">Церемонія</div></div></div>
+      <div class="p-item"><div class="p-item-inner pg8">🌷</div><div class="p-item-overlay"><div class="p-item-label">Деталі</div></div></div>
+    </div>
+  </div>
+
+  <div class="p-panel" id="tab-video">
+    <div class="portfolio-grid two-col">
+      <div class="p-item wide"><div class="p-item-inner pg5" style="font-size:64px;">🎬</div><div class="p-item-overlay"><div class="p-item-label">Юля та Олексій — UHD Фільм</div></div></div>
+      <div class="p-item wide"><div class="p-item-inner pg7" style="font-size:64px;">🎥</div><div class="p-item-overlay"><div class="p-item-label">Наталія та Богдан — UHD Фільм</div></div></div>
+    </div>
+  </div>
+
+  <div class="p-panel" id="tab-couples">
+    <div class="portfolio-grid">
+      <div class="p-item"><div class="p-item-inner pg2">💑</div><div class="p-item-overlay"><div class="p-item-label">Аліна та Дмитро</div></div></div>
+      <div class="p-item"><div class="p-item-inner pg6">💕</div><div class="p-item-overlay"><div class="p-item-label">Олена та Сергій</div></div></div>
+      <div class="p-item"><div class="p-item-inner pg8">🤝</div><div class="p-item-overlay"><div class="p-item-label">Марія та Іван</div></div></div>
+      <div class="p-item"><div class="p-item-inner pg1">🌹</div><div class="p-item-overlay"><div class="p-item-label">Юля та Олексій</div></div></div>
+    </div>
+  </div>
+
+  <div class="portfolio-cta reveal">
+    <a href="https://www.facebook.com/MrPPVanya" target="_blank" class="btn-dark">
+      Більше робіт у Facebook →
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about">
+    <div class="about-img-side">
+      <div class="about-portrait">
+        📷
+        <div class="about-portrait-tag">ПП Ваня</div>
+        <div class="about-portrait-bottom">
+          <div class="apb-name">Іван Наконечний</div>
+          <div class="apb-sub">Фотограф · Відеооператор</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-text-side">
+      <div class="s-label reveal">Про мене</div>
+      <h2 class="s-h2 reveal">Іван <em>Наконечний</em></h2>
+      <div class="about-stats-row reveal">
+        <div><div class="as-num">UHD</div><div class="as-lbl">Якість відео</div></div>
+        <div><div class="as-num">4,6к</div><div class="as-lbl">Facebook</div></div>
+        <div><div class="as-num">Рівне</div><div class="as-lbl">та Київ</div></div>
+      </div>
+      <p class="about-p reveal">Весільний фотограф і відеооператор з Рівного. Знімаю весілля у Рівному, Київі та по всій Україні під брендом <strong style="color:var(--dark);">ПП Ваня</strong>.</p>
+      <div class="about-quote reveal">"Михайловича всім рекомендую" — Віталій Мойсеєць</div>
+      <p class="about-p reveal">Знімаю у форматі UHD для максимальної кінематографічної якості. Понад 4 600 підписників у Facebook.</p>
+      <div class="about-chips reveal">
+        <span class="chip">UHD Відео</span>
+        <span class="chip">Весілля</span>
+        <span class="chip">Рівне</span>
+        <span class="chip">Київ</span>
+        <span class="chip">Фото + Відео</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews pad" id="reviews">
+  <div class="reviews-wrap">
+    <div class="s-label reveal" style="justify-content:center;">Відгуки клієнтів</div>
+    <h2 class="s-h2 reveal">Що кажуть <em>про мене</em></h2>
+    <div class="reviews-score-bar reveal">
+      <div class="rsb-num">3,7</div>
+      <div><div class="rsb-stars">★★★★☆</div><div class="rsb-sub">Google Maps · 3 відгуки</div></div>
+    </div>
+    <div class="review-card reveal">
+      <p class="review-txt">Я Михайловича всім рекомендую</p>
+      <div class="review-author">
+        <div class="rv-avatar">В</div>
+        <div>
+          <div class="rv-name">Віталій Мойсеєць</div>
+          <div class="rv-meta">★★★★★ · 6 років тому · Google Maps</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-left">
+    <div class="s-label reveal">Контакти</div>
+    <h2 class="s-h2 reveal">Зв'яжіться<br><em>зі мною</em></h2>
+    <div class="contact-items">
+      <a href="tel:+380966836287" class="ci reveal">
+        <div class="ci-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l1.27-.52a2 2 0 012.11.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+        <div><div class="ci-lbl">Телефон</div><div class="ci-val">+380 (96) 683-6287</div><div class="ci-sub">Щоденно 07:00–20:00</div></div>
+      </a>
+      <a href="https://www.facebook.com/MrPPVanya" target="_blank" class="ci reveal d1">
+        <div class="ci-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></div>
+        <div><div class="ci-lbl">Facebook</div><div class="ci-val">facebook.com/MrPPVanya</div><div class="ci-sub">4 600+ підписників · Всі роботи</div></div>
+      </a>
+      <div class="ci reveal d2">
+        <div class="ci-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><div class="ci-lbl">Місто</div><div class="ci-val">Рівне, Україна</div><div class="ci-sub">Київ та вся Україна за домовленістю</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-right">
+    <div class="s-label reveal">Графік роботи</div>
+    <h2 class="s-h2 reveal" style="font-size:38px;">Години<br><em>прийому</em></h2>
+    <div class="hours-table reveal">
+      <div class="hr-row"><span class="hr-day">Понеділок</span><span class="hr-time">07:00–20:00</span></div>
+      <div class="hr-row"><span class="hr-day">Вівторок</span><span class="hr-time">07:00–20:00</span></div>
+      <div class="hr-row"><span class="hr-day">Середа</span><span class="hr-time">07:00–20:00</span></div>
+      <div class="hr-row"><span class="hr-day">Четвер</span><span class="hr-time">07:00–20:00</span></div>
+      <div class="hr-row"><span class="hr-day">П'ятниця</span><span class="hr-time">07:00–20:00</span></div>
+      <div class="hr-row"><span class="hr-day">Субота</span><span class="hr-time">07:00–20:00</span></div>
+      <div class="hr-row" style="border:none;"><span class="hr-day">Неділя</span><span class="hr-time">07:00–20:00</span></div>
+    </div>
+    <a href="tel:+380966836287" class="call-btn reveal">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l1.27-.52a2 2 0 012.11.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      Зателефонувати зараз
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="f-brand">ПП Ваня — <em>Весільна зйомка</em></div>
+  <ul class="f-links">
+    <li><a href="#services">Послуги</a></li>
+    <li><a href="#portfolio">Портфоліо</a></li>
+    <li><a href="#about">Про мене</a></li>
+    <li><a href="#reviews">Відгуки</a></li>
+    <li><a href="#contact">Контакти</a></li>
+  </ul>
+  <div class="f-copy">© 2026 Іван Наконечний</div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('up'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+document.querySelectorAll('.p-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.p-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.p-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
